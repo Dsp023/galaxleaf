@@ -1,0 +1,33 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Resource {
+  id          String   @id @default(uuid())
+  name        String
+  description String
+  url         String
+  category    String
+  domain      String
+  status      String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  submittedBy String?  // Optional: User ID/Email if authenticated
+  icon        String?
+  iconUrl     String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model UserProfile {
+  id          String   @id // Firebase UID
+  email       String   @unique
+  displayName String?
+  photoURL    String?  // Can store larger strings here if needed
+  role        String   @default("USER") // USER, ADMIN
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
