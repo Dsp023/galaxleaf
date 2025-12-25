@@ -2,32 +2,19 @@
 
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useAuth } from "@/contexts/AuthContext";
 
 import { ResourceCard } from "@/components/ResourceCard";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { AuthButton } from "@/components/auth/AuthButton";
 import { Search, ExternalLink, Leaf, Github } from "lucide-react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 
 export default function ResourcesPage() {
-    const { user, loading } = useAuth();
     const router = useRouter();
     const [searchQuery, setSearchQuery] = useState("");
-
-    // STRICT PROTECTION: Redirect to home If not logged in
-    useEffect(() => {
-        if (!loading && !user) {
-            router.push("/");
-        }
-    }, [user, loading, router]);
-
-    if (loading) return null; // or a loading spinner
-    if (!user) return null; // Prevent flash of content
 
     const [resources, setResources] = useState<any[]>([]);
     const [isLoadingData, setIsLoadingData] = useState(true);
@@ -46,31 +33,11 @@ export default function ResourcesPage() {
             }
         };
 
-        if (user) {
-            fetchData();
-        }
-    }, [user]);
-
-    // Group flat resources back into Domain -> Category hierarchy
-    const groupedStack = resources.reduce((acc: any[], resource: any) => {
-        let domain = acc.find(d => d.name === resource.domain);
-        if (!domain) {
-            domain = { name: resource.domain, description: "", categories: [] };
-            acc.push(domain);
-        }
-
-        let category = domain.categories.find((c: any) => c.name === resource.category);
-        if (!category) {
-            category = { name: resource.category, tools: [] };
-            domain.categories.push(category);
-        }
-
-        category.tools.push(resource);
-        return acc;
+        fetchData();
     }, []);
 
     // Filter logic for deep hierarchy (Client-side for now to preserve UI structure)
-    const filteredStack = groupedStack.map(domain => {
+    const filteredStack = resources.map((domain: any) => {
         const matchingCategories = domain.categories.map((cat: any) => {
             const matchingTools = cat.tools.filter((tool: any) =>
                 tool.name.toLowerCase().includes(searchQuery.toLowerCase())
@@ -79,7 +46,7 @@ export default function ResourcesPage() {
         }).filter((cat: any) => cat.tools.length > 0);
 
         return { ...domain, categories: matchingCategories };
-    }).filter(domain => domain.categories.length > 0);
+    }).filter((domain: any) => domain.categories.length > 0);
 
     return (
         <div className="min-h-screen bg-background font-sans antialiased text-foreground">
@@ -173,7 +140,6 @@ export default function ResourcesPage() {
                                 <Github className="h-5 w-5" />
                             </Button>
                             <ModeToggle />
-                            <AuthButton />
                         </nav>
                     </div>
                 </div>

@@ -1,56 +1,22 @@
 "use client";
 
-import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ModeToggle } from "@/components/mode-toggle";
-import { AuthButton } from "@/components/auth/AuthButton";
 import { Leaf, Github, ArrowRight } from "lucide-react";
-import Link from "next/link";
-import { useAuth } from "@/contexts/AuthContext";
-import { LoginModal } from "@/components/auth/LoginModal";
-import { SignupModal } from "@/components/auth/SignupModal";
 import { useRouter } from "next/navigation";
 import { ParticlesBackground } from "@/components/ParticlesBackground";
 
 export default function Home() {
-  const { user } = useAuth();
   const router = useRouter();
-  const [showLogin, setShowLogin] = useState(false);
-  const [showSignup, setShowSignup] = useState(false);
 
-  // Strict Redirect: If user is logged in, they should arguably be at /resources already,
-  // but if they land here, "Get Started" takes them to dashboard.
   const handleGetStarted = () => {
-    if (user) {
-      router.push("/resources");
-    } else {
-      setShowLogin(true);
-    }
+    router.push("/resources");
   };
 
   return (
     <div className="min-h-screen bg-background font-sans antialiased text-foreground flex flex-col relative">
       {/* Particle Animation Background */}
       <ParticlesBackground />
-
-      {/* Auth Modals */}
-      <LoginModal
-        isOpen={showLogin}
-        onClose={() => setShowLogin(false)}
-        onSwitchToSignup={() => {
-          setShowLogin(false);
-          setShowSignup(true);
-        }}
-      />
-
-      <SignupModal
-        isOpen={showSignup}
-        onClose={() => setShowSignup(false)}
-        onSwitchToLogin={() => {
-          setShowSignup(false);
-          setShowLogin(true);
-        }}
-      />
 
       {/* Navbar */}
       <div className="border-b sticky top-0 z-50 bg-background/30 backdrop-blur-xl supports-[backdrop-filter]:bg-background/30 relative">
@@ -67,7 +33,6 @@ export default function Home() {
                 <Github className="h-5 w-5" />
               </Button>
               <ModeToggle />
-              <AuthButton />
             </nav>
           </div>
         </div>

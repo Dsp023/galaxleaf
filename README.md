@@ -5,18 +5,17 @@
 [![Next.js](https://img.shields.io/badge/Next.js-16.1-black?logo=next.js)](https://nextjs.org/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)](https://www.typescriptlang.org/)
 [![TailwindCSS](https://img.shields.io/badge/TailwindCSS-4.0-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![Firebase](https://img.shields.io/badge/Firebase-12.7-orange?logo=firebase)](https://firebase.google.com/)
 
 ## ✨ Features
 
 ### 🛠️ Resource Explorer
 - **Curated Collection:** 50+ handpicked development tools across 10+ categories
-- **Smart Search:** Real-time search with fuzzy matching and category filtering  
+- **Smart Search:** Client-side real-time search with fuzzy matching and category filtering
 - **Interactive UI:** Glassmorphic cards with smooth animations
 - **Tool Discovery:** External tools with favicon previews + internal wiki concepts
 
 ### 📚 Comprehensive Wiki
-- **38 Technical Guides** covering:
+- **Technical Guides** covering:
   - 🤖 **AI/ML:** Transformers, RAG, RLHF, Embeddings, Prompt Engineering
   - 🎨 **Frontend:** Event Loop, DOM, Virtual DOM, Hydration, Rendering Patterns
   - ⚙️ **Backend:** ACID, Microservices, SQL/NoSQL, CAP Theorem, Scaling
@@ -33,18 +32,16 @@
   - Dark mode optimized
 
 ### 🎯 User Experience
-- **Authentication:** Secure Firebase auth with email/password
-- **Personalization:** User profiles with customization options
 - **Smooth Animations:** Framer Motion + particle background effects
 - **Responsive Design:** Mobile-first, works on all devices
 - **Dark Mode:** System-aware theme switching
+- **No Login Required:** Instant access to all content
 
 ## 🚀 Quick Start
 
 ### Prerequisites
 - **Node.js** 18.x or higher
 - **npm** or **yarn**
-- **Firebase account** (for authentication)
 
 ### Installation
 
@@ -59,33 +56,12 @@ cd galaxleaf
 npm install
 ```
 
-3. **Set up environment variables:**
-
-Create a `.env.local` file in the root directory:
-
-```env
-# Firebase Configuration
-NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
-NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your-project.firebaseapp.com
-NEXT_PUBLIC_FIREBASE_PROJECT_ID=your-project-id
-NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your-project.appspot.com
-NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
-NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abc123
-NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=G-XXXXXXXXXX
-```
-
-**Get Firebase credentials:**
-1. Go to [Firebase Console](https://console.firebase.google.com/)
-2. Create a new project or select existing
-3. Settings → Project Settings → Your apps → Web app
-4. Copy configuration values
-
-4. **Run the development server:**
+3. **Run the development server:**
 ```bash
 npm run dev
 ```
 
-5. **Open your browser:**
+4. **Open your browser:**
 Navigate to [http://localhost:3000](http://localhost:3000)
 
 ## 📁 Project Structure
@@ -93,28 +69,22 @@ Navigate to [http://localhost:3000](http://localhost:3000)
 ```
 galaxleaf/
 ├── src/
-│   ├── app/                    # Next.js 14 App Router
-│   │   ├── page.tsx           # Homepage with particles
-│   │   ├── resources/         # Resource explorer
-│   │   ├── wiki/              # Wiki page routes
-│   │   └── profile/           # User profile
-│   ├── components/            # React components
-│   │   ├── ui/               # shadcn/ui components
-│   │   ├── auth/             # Authentication modals
+│   ├── app/                    # Next.js App Router
+│   │   ├── page.tsx            # Homepage with particles
+│   │   ├── resources/          # Resource explorer
+│   │   └── wiki/               # Wiki page routes
+│   ├── components/             # React components
+│   │   ├── ui/                 # shadcn/ui components
 │   │   ├── ParticlesBackground.tsx
 │   │   ├── ResourceCard.tsx
 │   │   └── TableOfContents.tsx
 │   ├── content/
-│   │   └── docs/             # 38 Markdown wiki files
-│   ├── contexts/
-│   │   └── AuthContext.tsx   # Firebase auth provider
+│   │   └── docs/               # Markdown wiki files
 │   ├── data/
-│   │   └── resources.ts      # Curated tool catalog
-│   └── lib/
-│       └── firebase.ts       # Firebase configuration
-├── public/                    # Static assets
-├── tailwind.config.ts        # TailwindCSS config
-├── next.config.ts            # Next.js config
+│   │   └── resources.ts        # Curated tool catalog (Static Data Source)
+├── public/                     # Static assets
+├── tailwind.config.ts          # TailwindCSS config
+├── next.config.ts              # Next.js config
 └── package.json
 ```
 
@@ -138,11 +108,6 @@ galaxleaf/
 - **[rehype](https://github.com/rehypejs/rehype)** - HTML processing
 - **[remark](https://github.com/remarkjs/remark)** - Markdown processing
 - **[Prism.js](https://prismjs.com/)** - Code syntax highlighting
-
-### Backend & Auth
-- **[Firebase 12.7](https://firebase.google.com/)** - Authentication & potential database
-- **[React Hook Form](https://react-hook-form.com/)** - Form management
-- **[Zod](https://zod.dev/)** - Schema validation
 
 ## 🎨 Key Features Explained
 
@@ -197,31 +162,11 @@ git push -u origin main
 2. **Deploy on Vercel:**
 - Go to [vercel.com](https://vercel.com)
 - Import your GitHub repository
-- Add environment variables (Firebase config)
 - Deploy! ✅
 
 Your app will be live at `https://your-project.vercel.app`
 
-**Detailed deployment guide:** See [DEPLOYMENT_GUIDE.md](./DEPLOYMENT_GUIDE.md)
-
-### Alternative: Netlify
-- Import from GitHub
-- Build command: `npm run build`
-- Publish directory: `.next`
-- Add environment variables
-- Deploy!
-
 ## 🔧 Configuration
-
-### Firebase Setup
-
-1. **Enable Authentication:**
-   - Firebase Console → Authentication → Sign-in method
-   - Enable "Email/Password"
-
-2. **Authorized Domains:**
-   - Add `localhost` (for development)
-   - Add `your-domain.vercel.app` (for production)
 
 ### Customization
 
@@ -249,14 +194,7 @@ Contributions are welcome! Here's how:
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
-### Contribution Ideas:
-- 📝 Expand existing wiki articles
-- 🛠️ Add new tools to the resource catalog
-- 🐛 Fix bugs or improve performance
-- 🎨 Enhance UI/UX
-- 🌐 Add multi-language support
-
-## 📄 License
+##  License
 
 This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) file for details.
 
@@ -265,15 +203,8 @@ This project is licensed under the **MIT License** - see the [LICENSE](LICENSE) 
 - **[Next.js](https://nextjs.org/)** - Amazing React framework
 - **[Vercel](https://vercel.com/)** - Seamless deployment
 - **[shadcn/ui](https://ui.shadcn.com/)** - Beautiful component library
-- **[Firebase](https://firebase.google.com/)** - Authentication platform
 - **[Lucide](https://lucide.dev/)** - Icon library
 - All the amazing open-source projects featured in the catalog!
-
-## 📧 Contact
-
-- **Author:** Your Name
-- **GitHub:** [@yourusername](https://github.com/yourusername)
-- **Email:** your.email@example.com
 
 ## ⭐ Show Your Support
 
