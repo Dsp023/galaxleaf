@@ -29,9 +29,11 @@ export default function Home() {
           </div>
           <div className="flex flex-1 items-center justify-end space-x-2">
             <nav className="flex items-center space-x-2">
-              <Button variant="ghost" size="icon">
-                <Github className="h-5 w-5" />
-              </Button>
+              <a href="https://github.com/Dsp023/galaxleaf" target="_blank" rel="noopener noreferrer">
+                <Button variant="ghost" size="icon">
+                  <Github className="h-5 w-5" />
+                </Button>
+              </a>
               <ModeToggle />
             </nav>
           </div>
@@ -58,13 +60,15 @@ export default function Home() {
             <Button size="lg" className="h-12 px-8 text-lg gap-2" onClick={handleGetStarted}>
               Get Started <ArrowRight className="h-5 w-5" />
             </Button>
-            <Button variant="outline" size="lg" className="h-12 px-8 text-lg" onClick={() => window.open('https://github.com', '_blank')}>
-              View on GitHub
-            </Button>
+            <a href="https://github.com/Dsp023/galaxleaf" target="_blank" rel="noopener noreferrer">
+              <Button variant="outline" size="lg" className="h-12 px-8 text-lg">
+                View on GitHub
+              </Button>
+            </a>
           </div>
 
         </section>
       </main>
-    </div>
+    </div >
   );
 }
