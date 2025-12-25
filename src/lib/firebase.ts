@@ -5,7 +5,7 @@ import { getAuth } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDKjAvinkm_l2VeX-AbzmkaYBWrhPiTMUo",
+    apiKey: "AIzaSyDKjAvinkm_l2VeX-AbzmkaYBWrhPiTMUxo",
     authDomain: "galaxleaf.firebaseapp.com",
     projectId: "galaxleaf",
     storageBucket: "galaxleaf.firebasestorage.app",
